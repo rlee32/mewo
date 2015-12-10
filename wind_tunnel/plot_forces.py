@@ -6,7 +6,7 @@ import math
 from python_modules import force_read
 
 forces_path = "postProcessing/wing/0"
-forces_file = forces_path+"/forces_upwind_co1.dat"
+forces_file = forces_path+"/forces.dat"
 
 if not os.path.isfile(forces_file):
   print "Forces file not found at "+forces_file

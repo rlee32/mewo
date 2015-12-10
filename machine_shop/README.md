@@ -17,6 +17,9 @@ Fixed parameters:
 1. 5 elements.  
 2. Tube (leading edge) radius of 0.5 in.  
 3. Joint distance factor of 4. This describes the length of the transition from 
-  the round leading edge to the thin wing section.  
+  the round leading edge to the thin wing section.    
 
+To view the geometry currently on file, use:  
+
+gmsh main.geo  
 

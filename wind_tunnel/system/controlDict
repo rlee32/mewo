@@ -17,19 +17,21 @@ FoamFile
 
 application     pimpleFoam;
 
-startFrom       latestTime; //startTime;
+startFrom       latestTime; 
+// startFrom       startTime;
 
 startTime       0;
 
-stopAt          endTime; //writeNow;
+stopAt          endTime;
+// stopAt          writeNow;
 
-endTime         5;
+endTime         0.04;
 
-deltaT          1;
+deltaT          0.001;
 
 writeControl    adjustableRunTime;
 
-writeInterval   0.1;
+writeInterval   0.01;
 
 purgeWrite      0;
 

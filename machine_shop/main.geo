@@ -25,6 +25,7 @@ current_entity = 0;
 leading_edge[] = {0,0,0};
 
 Call draw_wing;
+Translate {-quarter_chord[0], -quarter_chord[1], 0} { Line{wing_outlines[]}; }
 
 boundary_min_y = global_trailing_edge[1] - boundary_distance;
 boundary_max_x = global_trailing_edge[0] + boundary_distance;

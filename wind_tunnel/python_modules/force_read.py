@@ -45,29 +45,23 @@ def get_forces_dict(forces_file):
   datafile.close()
   return [time, drag, lift, moment]
 
+def get_line_from_file(file_path, line_number):
+  with open(file_path, "r") as temp_file:
+    lines = temp_file.readlines()
+  temp_file.close()
+  return lines[line_number]
+  
 def get_overall_chord():
   # Searches file for the chord.
-  chord = 0
-  with open("../machine_shop/shapes/global_wing_chord.dat","r") as cfile:
-    for line in cfile:
-      # Assume first line is the chord.
-      chord = float(line)
-  cfile.close()
-  return chord
+  return float(get_line_from_file("geometry.dat", 0))
 
 def get_cell_depth():
   # Searches file for the cell_depth.
-  cell_depth = 0
-  with open("../mesh_factory/numerical_inputs.geo","r") as cfile:
-    for line in cfile:
-      if "cell_depth" in line:
-        cell_depth = float( (line.split("=")[1]).strip().replace(';','') )
-  cfile.close()
-  return cell_depth
-  return
+  return float(get_line_from_file("geometry.dat", 1))
 
 def get_V():
   # Searches file for the velocity.
+  # We assume we are in the case directory.
   velocity = 0
   with open("0/include/initialConditions","r") as ufile:
     for line in ufile:
@@ -77,11 +71,21 @@ def get_V():
   ufile.close()
   return velocity
 
-
 def trailing_average(time, data, trailing_time):
   end_time = time[-1]
   start_time = end_time - trailing_time
-  diff = numpy.abs( x-start_time for x in time )
+  diff = numpy.abs( [x-start_time for x in time] )
   start_index = diff.argmin()
   subdata = data[start_index:len(data)]
   return sum(subdata) / len(subdata)
+
+def get_latest_force_time(patch):
+  # Assumes in main case directory
+  # Assumes all folders are floating-point named
+  # Gets folder with highest floating-point value
+  folders = [ float(x) for x in os.listdir("postProcessing/"+patch) ]
+  folders.sort()
+  folder = folders[-1]
+  if folder.is_integer():
+    folder = int(folder)
+  return folder
