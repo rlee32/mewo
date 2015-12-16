@@ -8,7 +8,8 @@ The modules are divided into their own folders:
 2. machine_shop: Gmsh meshing  
 3. brain: Python neural network  
 4. vault: CFD results  
-5. bridge: temporary file storage for interaction between modules / folders.  
+5. bridge: temporary file storage for interaction between modules / folders.
+6. schedule: contains the to-do simulations as feature vectors.
 
 The CFD solver parameters and general meshing characteristics are fixed for 
 each optimization study. See the modules for details.

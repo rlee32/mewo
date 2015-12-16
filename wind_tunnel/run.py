@@ -3,15 +3,16 @@
 # We assume this is called from the case directory.
 
 import os
-from python_modules import force_read
-from python_modules import settings_change
-from python_modules import file_operations
+from openfoam_python import force_read
+from openfoam_python import boundary_conditions
+from openfoam_python import controlDict
+from openfoam_python import file_operations
 
 # Parameters
-MIN_SIM_TIME = 0.01 # The minimum simulation time before checking convergence. 
-UPDATE_TIME = 0.01 # The period to check convergence.
-MAX_SIM_TIME = 0.03
-TRAIL_CHECK = 0.01 # The amount of time to average.
+MIN_SIM_TIME = 1.5 # The minimum simulation time before checking convergence. 
+UPDATE_TIME = 0.1 # The period to check convergence.
+MAX_SIM_TIME = 5.0
+TRAIL_CHECK = 0.1 # The amount of time to average.
 STOP_THRESHOLD_PERCENT = 1 # percent change below which simulation is stopped.
 
 # Prepare the case.
@@ -19,14 +20,15 @@ print "Cleaning the case."
 file_operations.clean_case()
 os.system("mkdir logs")
 print "Converting mesh."
-os.system("gmshToFoam ../bridge/main.msh > logs/gmshToFoam")
+os.system("mv ../bridge/main.msh main.msh")
+os.system("gmshToFoam main.msh > logs/gmshToFoam")
 print "Modifying BC."
 boundary_file = "constant/polyMesh/boundary"
-settings_change.modify_empty_bc(boundary_file, "front_and_back", "empty")
-settings_change.modify_empty_bc(boundary_file, "wing", "wall")
-settings_change.set_end_time(MIN_SIM_TIME)
-settings_change.set_write_interval(MIN_SIM_TIME)
-os.system("cp ../bridge/geometry.dat ./geometry.dat")
+boundary_conditions.modify_empty_bc(boundary_file, "front_and_back", "empty")
+boundary_conditions.modify_empty_bc(boundary_file, "wing", "wall")
+controlDict.set_end_time(MIN_SIM_TIME)
+controlDict.set_write_interval(MIN_SIM_TIME)
+os.system("mv ../bridge/geometry.dat ./geometry.dat")
 
 # Convergence loop
 current_sim_time = MIN_SIM_TIME
@@ -34,7 +36,7 @@ current_lift_measurement = None;
 while current_sim_time <= MAX_SIM_TIME:
   # Run simulation.
   print "Running OpenFOAM simulation to "+str(current_sim_time)
-  os.system("pimpleFoam >> logs/simulation")
+  os.system("pimpleFoam > logs/simulation")
 
   # Extract averaged performance figure.
   latest_force_time = force_read.get_latest_force_time("wing")
@@ -54,11 +56,13 @@ while current_sim_time <= MAX_SIM_TIME:
       break
     else:
       current_lift_measurement = new_lift_measurement
+  else:
+    current_lift_measurement = new_lift_measurement
 
   # Prepare for next iteration.
   current_sim_time += UPDATE_TIME
-  settings_change.set_end_time(current_sim_time)
-  settings_change.set_write_interval(UPDATE_TIME)
+  controlDict.set_end_time(current_sim_time)
+  controlDict.set_write_interval(UPDATE_TIME)
 
 # Post-processing
 print "Obtaining performance figures."
@@ -85,7 +89,7 @@ os.system("cp -r ./* "+new_vault_folder+"/")
 # Store performance result
 print "Storing performance result."
 new_vault_file = "../vault/"+new_vault_name+".dat"
-os.system("cp ../bridge/physical_inputs.dat "+new_vault_file)
+os.system("mv ../bridge/physical_inputs.dat "+new_vault_file)
 with open(new_vault_file, "a") as vf:
   vf.write("\n")
   vf.write(str(cl)+"\n")

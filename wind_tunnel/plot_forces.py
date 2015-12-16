@@ -3,7 +3,7 @@
 import os
 import sys
 import math
-from python_modules import force_read
+from openfoam_python import force_read
 
 forces_path = "postProcessing/wing/0"
 forces_file = forces_path+"/forces.dat"

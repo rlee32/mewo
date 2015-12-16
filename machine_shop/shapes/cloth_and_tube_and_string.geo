@@ -224,8 +224,8 @@ Function draw_wing
     + (global_leading_edge[1] - global_trailing_edge[1])^2
     + (global_leading_edge[2] - global_trailing_edge[2])^2
     );
-  Printf("%f", global_chord) > "../../bridge/geometry.dat";
-  Printf("%f", cell_depth) >> "../../bridge/geometry.dat";
+  Printf("%f", global_chord) > "../geometry.dat";
+  Printf("%f", cell_depth) >> "../geometry.dat";
   quarter_chord[] = {0, 0, 0};
   quarter_chord[0] = global_leading_edge[0] 
     + (global_trailing_edge[0] - global_leading_edge[0]) / 4;
