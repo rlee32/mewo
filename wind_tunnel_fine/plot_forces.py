@@ -5,11 +5,7 @@ import sys
 import math
 from openfoam_python import force_read
 
-time_folder = "0"
-if len(sys.argv) == 2:
-  time_folder = sys.argv[1]
-
-forces_path = "postProcessing/wing/"+time_folder
+forces_path = "postProcessing/wing/0.1"
 forces_file = forces_path+"/forces.dat"
 
 if not os.path.isfile(forces_file):
@@ -39,7 +35,7 @@ q = 0.5*rho*V*V
 denom = q*A
 lift = [x / denom for x in lift]
 drag = [x / denom for x in drag]
-moment = [x / denom / chord for x in moment]
+moment = [x / denom for x in moment]
 
 outputfile = open('forces.txt','w')
 for i in range(0,len(time)):

@@ -33,6 +33,8 @@ os.system("mv ../bridge/geometry.dat ./geometry.dat")
 # Convergence loop
 current_sim_time = MIN_SIM_TIME
 current_lift_measurement = None;
+current_drag_measurement = None;
+current_moment_measurement = None;
 while current_sim_time <= MAX_SIM_TIME:
   # Run simulation.
   print "Running OpenFOAM simulation to "+str(current_sim_time)
@@ -47,17 +49,28 @@ while current_sim_time <= MAX_SIM_TIME:
   lift = master_list[2]
   moment = master_list[3]
   new_lift_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
+  new_drag_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
+  new_moment_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
 
   # Check to stop
   if current_lift_measurement != None:
-    diff = abs(new_lift_measurement-current_lift_measurement)
-    ratio = diff / current_lift_measurement
+    diff_lift = abs(new_lift_measurement-current_lift_measurement)
+    diff_drag = abs(new_drag_measurement-current_drag_measurement)
+    diff_moment = abs(new_moment_measurement-current_moment_measurement)
+    ratio_lift = diff_lift / current_lift_measurement
+    ratio_drag = diff_drag / current_drag_measurement
+    ratio_moment = diff_moment / current_moment_measurement
+    ratio = max([ratio_lift, ratio_drag, ratio_moment])
     if ratio*100 < STOP_THRESHOLD_PERCENT:
       break
     else:
       current_lift_measurement = new_lift_measurement
+      current_drag_measurement = new_drag_measurement
+      current_moment_measurement = new_moment_measurement
   else:
     current_lift_measurement = new_lift_measurement
+    current_drag_measurement = new_drag_measurement
+    current_moment_measurement = new_moment_measurement
 
   # Prepare for next iteration.
   current_sim_time += UPDATE_TIME
