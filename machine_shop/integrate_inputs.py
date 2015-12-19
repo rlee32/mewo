@@ -42,7 +42,6 @@ def write_gmsh_input(feature_vector, gmsh_input_file):
   return
 
 
-
 # check_inputs(sys.argv)
 
 # feature_vector = read_feature_vector(sys.argv[1])

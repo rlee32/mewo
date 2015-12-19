@@ -9,11 +9,11 @@ from openfoam_python import controlDict
 from openfoam_python import file_operations
 
 # Parameters
-MIN_SIM_TIME = 1.5 # The minimum simulation time before checking convergence. 
+MIN_SIM_TIME = 1.0 # The minimum simulation time before checking convergence. 
 UPDATE_TIME = 0.1 # The period to check convergence.
 MAX_SIM_TIME = 5.0
 TRAIL_CHECK = 0.1 # The amount of time to average.
-STOP_THRESHOLD_PERCENT = 1 # percent change below which simulation is stopped.
+STOP_THRESHOLD_PERCENT = 0.5 # percent change below which simulation is stopped.
 
 # Prepare the case.
 print "Cleaning the case."

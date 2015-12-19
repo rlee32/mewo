@@ -1,0 +1,81 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : 3.0.0-8b097f6d8dd9
+Exec   : gmshToFoam main.msh
+Date   : Dec 17 2015
+Time   : 01:08:37
+Host   : "lordvon-XPS-8300"
+PID    : 23865
+Case   : /home/lordvon/Desktop/mewo/wind_tunnel
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Starting to read mesh format at line 2
+Read format version 2.2  ascii 0
+
+Starting to read physical names at line 5
+Physical names:6
+    Surface 1	inlet
+    Surface 2	outlet
+    Surface 3	tunnel
+    Surface 4	wing
+    Surface 5	front_and_back
+    Volume 6	volume
+
+Starting to read points at line 14
+Vertices to be read:69092
+Vertices read:69092
+
+Starting to read cells at line 69109
+Cells to be read:205864
+
+Mapping region 5 to Foam patch 0
+Mapping region 3 to Foam patch 1
+Mapping region 1 to Foam patch 2
+Mapping region 2 to Foam patch 3
+Mapping region 4 to Foam patch 4
+Mapping region 6 to Foam cellZone 0
+Cells:
+    total:68382
+    hex  :0
+    prism:68382
+    pyr  :0
+    tet  :0
+
+CellZones:
+Zone	Size
+    0	68382
+
+Skipping tag  at line 274976
+Patch 0 gets name front_and_back
+Patch 1 gets name tunnel
+Patch 2 gets name inlet
+Patch 3 gets name outlet
+Patch 4 gets name wing
+
+--> FOAM Warning : 
+    From function polyMesh::polyMesh(... construct from shapes...)
+    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 625
+    Found 137482 undefined faces in mesh; adding to default patch.
+Finding faces of patch 0
+Finding faces of patch 1
+Finding faces of patch 2
+Finding faces of patch 3
+Finding faces of patch 4
+
+FaceZones:
+Zone	Size
+
+Writing zone 0 to cellZone volume and cellSet
+End
+
