@@ -40,6 +40,7 @@ new_vault_folder = "../vault/"+new_vault_name
 os.system("mkdir "+new_vault_folder)
 file_operations.leave_last_time()
 os.system("cp -r ./* "+new_vault_folder+"/")
+os.system("rm -r ./"+new_vault_folder+"/openfoam_python/.git")
 
 # Store performance result
 print "Storing performance result."

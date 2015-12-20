@@ -1,0 +1,42 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : 3.0.0-8b097f6d8dd9
+Exec   : mapFields ../wind_tunnel_coarse -consistent -sourceTime latestTime
+Date   : Dec 19 2015
+Time   : 19:46:31
+Host   : "lordvon-XPS-8300"
+PID    : 20504
+Case   : /home/lordvon/Desktop/mewo/wind_tunnel_fine
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Source: ".." "wind_tunnel_coarse"
+Target: "/home/lordvon/Desktop/mewo" "wind_tunnel_fine"
+
+Create databases as time
+
+Source time: 1.6
+Target time: 0
+Create meshes
+
+Source mesh size: 29614	Target mesh size: 61036
+
+
+Consistently creating and mapping fields for time 1.6
+
+    interpolating p
+    interpolating nut
+    interpolating k
+    interpolating omega
+    interpolating U
+
+End
+

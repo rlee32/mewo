@@ -27,6 +27,7 @@ cd ../
 
 cd wind_tunnel_fine
 ./clean_case.py
+cp -r ../wind_tunnel_coarse/0 ./
 ./prepare_run.py
 ./second_order.py
 echo "Mapping flow solution from coarse to fine."
@@ -34,4 +35,13 @@ mapFields ../wind_tunnel_coarse -consistent -sourceTime latestTime \
   > ../bridge/map_log
 ./run.py 0.1 2.0
 ./store_solution.py
+cd ../
+
+cd wind_tunnel_coarse
+./clean_case.py
+cd ../
+
+cd wind_tunnel_fine
+./clean_case.py
+cp -r ../wind_tunnel_coarse/0 ./
 cd ../
