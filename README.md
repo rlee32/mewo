@@ -10,6 +10,7 @@ The modules are divided into their own folders:
 4. vault: CFD results  
 5. bridge: temporary file storage for interaction between modules / folders.
 6. schedule: contains the to-do simulations as feature vectors.
+7. wind_tunnel_fine and wind_tunnel_coarse: used only in the run_dynamic_schedule.sh script. Allows for faster overall simulation 
 
 The CFD solver parameters and general meshing characteristics are fixed for 
 each optimization study. See the modules for details.

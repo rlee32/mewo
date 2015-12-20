@@ -34,6 +34,7 @@ echo "Mapping flow solution from coarse to fine."
 mapFields ../wind_tunnel_coarse -consistent -sourceTime latestTime \
   > ../bridge/map_log
 ./run.py 0.1 2.0
+rm main.msh
 ./store_solution.py
 cd ../
 

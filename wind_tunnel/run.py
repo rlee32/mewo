@@ -49,8 +49,9 @@ while current_sim_time <= MAX_SIM_TIME:
   lift = master_list[2]
   moment = master_list[3]
   new_lift_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
-  new_drag_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
-  new_moment_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
+  new_drag_measurement = force_read.trailing_average(time, drag, TRAIL_CHECK)
+  new_moment_measurement = \
+    force_read.trailing_average(time, moment, TRAIL_CHECK)
 
   # Check to stop
   if current_lift_measurement != None:

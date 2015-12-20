@@ -9,7 +9,7 @@
 UPDATE_TIME = 0.1 # The period to check convergence.
 TRAIL_CHECK = 0.1 # The amount of time to average; also defined in 
   # store_solution.py.
-STOP_THRESHOLD_PERCENT = 1 # percent change below which simulation is stopped.
+STOP_THRESHOLD_PERCENT = 0.5 # percent change below which simulation is stopped.
 
 import os
 import sys
@@ -58,17 +58,29 @@ while current_sim_time <= MAX_SIM_TIME:
   lift = master_list[2]
   moment = master_list[3]
   new_lift_measurement = force_read.trailing_average(time, lift, TRAIL_CHECK)
+  new_drag_measurement = force_read.trailing_average(time, drag, TRAIL_CHECK)
+  new_moment_measurement = \
+    force_read.trailing_average(time, moment, TRAIL_CHECK)
 
   # Check to stop
   if current_lift_measurement != None:
-    diff = abs(new_lift_measurement-current_lift_measurement)
-    ratio = diff / current_lift_measurement
+    diff_lift = abs(new_lift_measurement-current_lift_measurement)
+    diff_drag = abs(new_drag_measurement-current_drag_measurement)
+    diff_moment = abs(new_moment_measurement-current_moment_measurement)
+    ratio_lift = diff_lift / current_lift_measurement
+    ratio_drag = diff_drag / current_drag_measurement
+    ratio_moment = diff_moment / current_moment_measurement
+    ratio = max([ratio_lift, ratio_drag, ratio_moment])
     if ratio*100 < STOP_THRESHOLD_PERCENT:
       break
     else:
       current_lift_measurement = new_lift_measurement
+      current_drag_measurement = new_drag_measurement
+      current_moment_measurement = new_moment_measurement
   else:
     current_lift_measurement = new_lift_measurement
+    current_drag_measurement = new_drag_measurement
+    current_moment_measurement = new_moment_measurement
 
   # Prepare for next iteration.
   current_sim_time += UPDATE_TIME

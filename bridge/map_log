@@ -8,9 +8,9 @@
 Build  : 3.0.0-8b097f6d8dd9
 Exec   : mapFields ../wind_tunnel_coarse -consistent -sourceTime latestTime
 Date   : Dec 19 2015
-Time   : 19:46:31
+Time   : 21:50:47
 Host   : "lordvon-XPS-8300"
-PID    : 20504
+PID    : 21614
 Case   : /home/lordvon/Desktop/mewo/wind_tunnel_fine
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
@@ -27,7 +27,7 @@ Source time: 1.6
 Target time: 0
 Create meshes
 
-Source mesh size: 29614	Target mesh size: 61036
+Source mesh size: 30282	Target mesh size: 65430
 
 
 Consistently creating and mapping fields for time 1.6
