@@ -39,7 +39,7 @@ q = 0.5*rho*V*V
 denom = q*A
 lift = [x / denom for x in lift]
 drag = [x / denom for x in drag]
-moment = [x / denom / chord for x in moment]
+moment = [x / denom for x in moment]
 
 outputfile = open('forces.txt','w')
 for i in range(0,len(time)):

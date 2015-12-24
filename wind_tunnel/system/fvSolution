@@ -48,14 +48,14 @@ solvers
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
-        tolerance       1e-06;
-        relTol          0;
+        tolerance       1e-09;
+        relTol          0.1;
     }
 
     "(U|k|omega)Final"
     {
         $U;
-        tolerance       1e-07;
+        tolerance       1e-09;
         relTol          0;
     }
 }
@@ -64,7 +64,7 @@ PIMPLE
 {
     correctPhi          yes;
     nOuterCorrectors    1;
-    nCorrectors         4;
+	nCorrectors		10;
     // nCorrectors is absolutely necessary! 
     // On a multi-element airfoil, I tested with nCorrectors=1 and the pressure 
     // distribution looked totally unphysical. Setting nCorrectors=3 made a 

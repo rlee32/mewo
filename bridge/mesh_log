@@ -1,5 +1,5 @@
 Info    : Running '/home/lordvon/gmsh-2.11.0-Linux/bin/gmsh main.geo -tol 1e-10 -3 -o main.msh' [Gmsh 2.11.0, 1 node, max. 1 thread]
-Info    : Started on Sat Dec 19 21:50:43 2015
+Info    : Started on Wed Dec 23 20:34:19 2015
 Info    : Reading 'main.geo'...
 Info    : Reading 'shapes/cloth_and_tube_and_string.geo'...
 Info    : Done reading 'shapes/cloth_and_tube_and_string.geo'
@@ -141,7 +141,7 @@ Info    : Meshing curve 309 (extruded)
 Info    : Meshing curve 313 (extruded)
 Info    : Meshing curve 317 (extruded)
 Info    : Meshing curve 321 (extruded)
-Info    : Done meshing 1D (0.060269 s)
+Info    : Done meshing 1D (0.071888 s)
 Info    : Meshing 2D...
 Info    : Meshing surface 105 (Plane, Delaunay)
 Info    : Meshing surface 154 (extruded)
@@ -189,11 +189,11 @@ Info    : Meshing surface 318 (extruded)
 Info    : Meshing surface 322 (extruded)
 Info    : Meshing surface 326 (extruded)
 Info    : Meshing surface 327 (extruded)
-Info    : Done meshing 2D (1.82462 s)
+Info    : Done meshing 2D (1.52405 s)
 Info    : Meshing 3D...
 Info    : Meshing volume 1 (extruded)
-Info    : Done meshing 3D (0.750777 s)
-Info    : 66164 vertices 198608 elements
+Info    : Done meshing 3D (0.497222 s)
+Info    : 52942 vertices 158942 elements
 Info    : Writing 'main.msh'...
 Info    : Done writing 'main.msh'
-Info    : Stopped on Sat Dec 19 21:50:46 2015
+Info    : Stopped on Wed Dec 23 20:34:22 2015
