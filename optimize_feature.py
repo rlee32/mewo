@@ -72,7 +72,6 @@ def write_new_feature_vector(base_path, value, index, \
         break
   new_vector.close()
   return
-write_new_feature_vector(base_file, current_value+increment, feature_index)
 
 def get_results(path):
   results = []
@@ -84,6 +83,40 @@ def get_results(path):
           results.append(float(line))
         index_ += 1
   return results
-results = get_results(base_file)
+current_optimization = get_results(base_file)
 print "Starting objective values:"
-print results
+print current_optimization
+
+# Begin optimization procedure.
+optimized = False
+increasing = False
+reverse = False
+while not optimized:
+  write_new_feature_vector(base_file, current_value+increment, feature_index)
+  os.system('./par_dyn_sched.sh')
+  newest_data_file = None
+  with open("bridge/newest_data_file.txt",'r') as f:
+    for line in f:
+      newest_data_file = line.strip()
+      break
+  if newest_data_file == None or newest_data_file == '':
+
+  else:
+    new_results = get_results("vault/"+newest_data_file)
+    dL = new_results[0] - current_optimization[0]
+    dD = new_results[1] - current_optimization[1]
+    objective = dL - dD
+    if objective >= 0:
+      current_optimization = new_results
+      increasing = True
+    else:
+      if increasing:
+        optimized = True
+      else:
+        if reverse:
+          optimized = True
+        else:
+          increment = -increment
+      reverse = True
+
+  optimized = True

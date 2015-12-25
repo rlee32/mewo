@@ -56,3 +56,5 @@ with open(new_vault_file, "a") as vf:
   vf.write(str(cl)+"\n")
   vf.write(str(cd)+"\n")
   vf.write(str(cm)+"\n")
+with open("../bridge/newest_data_file.txt",'w') as f:
+  f.write(new_vault_name+".dat")
