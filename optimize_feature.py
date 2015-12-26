@@ -88,19 +88,28 @@ print "Starting objective values:"
 print current_optimization
 
 # Begin optimization procedure.
-optimized = False
 increasing = False
 reverse = False
-while not optimized:
-  write_new_feature_vector(base_file, current_value+increment, feature_index)
+print "Starting with feature "+str(feature_index)+" at "+str(current_value)
+while True:
+  new_feature_value = current_value+increment
+  write_new_feature_vector(base_file, new_feature_value, feature_index)
+  print "Running "+str(new_feature_value)
+  print "===================="
   os.system('./par_dyn_sched.sh')
+  # Get file for new data point
   newest_data_file = None
   with open("bridge/newest_data_file.txt",'r') as f:
     for line in f:
       newest_data_file = line.strip()
       break
+  # Assume bad results when no data file
   if newest_data_file == None or newest_data_file == '':
-
+    if reverse or increasing:
+      break
+    else:
+      increment = -increment
+      reverse = True
   else:
     new_results = get_results("vault/"+newest_data_file)
     dL = new_results[0] - current_optimization[0]
@@ -108,15 +117,11 @@ while not optimized:
     objective = dL - dD
     if objective >= 0:
       current_optimization = new_results
+      current_value = new_feature_value
       increasing = True
     else:
-      if increasing:
-        optimized = True
+      if increasing or reverse:
+        break
       else:
-        if reverse:
-          optimized = True
-        else:
-          increment = -increment
-      reverse = True
-
-  optimized = True
+        increment = -increment
+        reverse = True
