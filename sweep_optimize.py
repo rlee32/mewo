@@ -58,7 +58,7 @@ if __name__ == '__main__':
     sys.exit()
   vector = sys.argv[1]
   index =  int(sys.argv[2])
-  if not os.path.isfile(vector):
+  if not os.path.isfile("vault/"+vector):
     print "Feature vector file not found! Exiting."
     sys.exit()
 

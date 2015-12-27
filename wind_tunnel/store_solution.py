@@ -36,11 +36,12 @@ cm = M / A / q / c
 print "Storing CFD solution."
 biggest_number = file_operations.get_highest_folder("../vault", "v")
 new_vault_name = "v"+str(biggest_number+1)
-new_vault_folder = "../vault/"+new_vault_name
+new_vault_folder = "../vault/"+new_vault_name.strip()
 os.system("mkdir "+new_vault_folder)
 file_operations.leave_last_time()
 os.system("cp -r ./* "+new_vault_folder+"/")
-if os.path.isdir("./"+new_vault_folder+"/openfoam_python/.git"):
+if os.path.isdir("./"+new_vault_folder+"/openfoam_python/.git") or \
+  os.path.isfile("./"+new_vault_folder+"/openfoam_python/.git"):
   print "Removing .git"
   os.system("rm -r ./"+new_vault_folder+"/openfoam_python/.git")
 if os.path.isfile("./"+new_vault_folder+"/main.msh"):
