@@ -1,0 +1,35 @@
+# The ordering of the variables is hard-coded.
+# Chords (m) (multiple values)
+# AOAs (deg) (multiple values)
+# x gaps (m) (multiple values)
+# y gaps (m) (multiple values)
+# Cloth span angles (controls camber) (deg) (multiple values)
+0.45
+0.35
+0.45
+0.35
+0.35
+-15 
+5 
+25 
+45 
+65 
+0.0 
+0.08 
+0.08 
+0.12 
+0.12
+0.0 
+-0.06 
+-0.06 
+-0.03
+-0.06
+45
+45
+45
+45
+45
+
+3.388708272
+0.617640019345
+0.784570637468

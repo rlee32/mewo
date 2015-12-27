@@ -90,6 +90,7 @@ print current_optimization
 # Begin optimization procedure.
 increasing = False
 reverse = False
+optimal_data_file = base_file
 print "Starting with feature "+str(feature_index)+" at "+str(current_value)
 while True:
   new_feature_value = current_value+increment
@@ -116,6 +117,7 @@ while True:
     dD = new_results[1] - current_optimization[1]
     objective = dL - dD
     if objective >= 0:
+      optimal_data_file = newest_data_file
       current_optimization = new_results
       current_value = new_feature_value
       increasing = True
@@ -125,3 +127,8 @@ while True:
       else:
         increment = -increment
         reverse = True
+
+print "===================="
+print "Optimization complete. Optimal feature set: "+optimal_data_file
+with open('optimal_vector.txt', 'w') as f:
+  f.write(optimal_data_file)

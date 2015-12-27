@@ -3,11 +3,16 @@ Multi-Element Wing Optimizer
 
 Here I optimize a multi-element wing using a CFD and machine learning.  
 
-To run the program with mesh refinement and in parallel:  
+To obtain a single result using mesh refinement and in parallel:  
 
 'source par_dyn_sched.sh'  
 
-You must first make sure the gmsh path is correctly defined in 'machine_shop/generate_mesh.sh'.
+There will be various optimization scripts:  
+1. optimize_feature.py  
+2. sweep_optimization.py
+
+You must first make sure the gmsh path is correctly defined in 
+'machine_shop/generate_mesh.sh'.
 
 The modules are divided into their own folders:  
 1. wind_tunnel: OpenFOAM CFD simulation  

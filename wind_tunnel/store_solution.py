@@ -40,8 +40,8 @@ new_vault_folder = "../vault/"+new_vault_name
 os.system("mkdir "+new_vault_folder)
 file_operations.leave_last_time()
 os.system("cp -r ./* "+new_vault_folder+"/")
-print "Removing .git"
 if os.path.isdir("./"+new_vault_folder+"/openfoam_python/.git"):
+  print "Removing .git"
   os.system("rm -r ./"+new_vault_folder+"/openfoam_python/.git")
 if os.path.isfile("./"+new_vault_folder+"/main.msh"):
   os.system("rm ./"+new_vault_folder+"/main.msh")
