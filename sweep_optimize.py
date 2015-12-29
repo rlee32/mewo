@@ -58,18 +58,18 @@ if __name__ == '__main__':
     sys.exit()
   vector = sys.argv[1]
   index =  int(sys.argv[2])
-  if not os.path.isfile("vault/"+vector):
+  if not os.path.isfile(vector):
     print "Feature vector file not found! Exiting."
     sys.exit()
 
   while index < 25:
-    print "++++++++++"
+    print "++++++++++++++++++++"
     print "OPTIMIZING FEATURE "+str(index)+" ("+\
       get_feature_description(index)+")"
-    print "++++++++++"
+    print "++++++++++++++++++++"
     step = determine_step(index)
     if step != None:
-      os.system("./optimize_feature.py vault/"+vector+" "+str(index)+" "+\
+      os.system("./optimize_feature.py "+vector+" "+str(index)+" "+\
         str(step))
       new_vector = get_one_liner('optimal_vector.txt')
       if new_vector != None:

@@ -1,15 +1,16 @@
 # mewo
 Multi-Element Wing Optimizer
 
-Here I optimize a multi-element wing using a CFD and machine learning.  
+Here I optimize a multi-element wing using CFD and machine learning.  
 
 To obtain a single result using mesh refinement and in parallel:  
 
 'source par_dyn_sched.sh'  
 
 There will be various optimization scripts:  
-1. optimize_feature.py  
-2. sweep_optimization.py
+1. optimize_feature.py: Optimizes a single feature. 
+2. sweep_optimization.py: Optimizes for all features sequentially.
+3. element_sweep.py: Optimizes for all features, but in a per-element ordering.
 
 You must first make sure the gmsh path is correctly defined in 
 'machine_shop/generate_mesh.sh'.

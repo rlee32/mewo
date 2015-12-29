@@ -95,6 +95,7 @@ print "Starting with feature "+str(feature_index)+" at "+str(current_value)
 while True:
   new_feature_value = current_value+increment
   write_new_feature_vector(base_file, new_feature_value, feature_index)
+  print "===================="
   print "Running "+str(new_feature_value)
   print "===================="
   os.system('./par_dyn_sched.sh')
@@ -112,7 +113,7 @@ while True:
       increment = -increment
       reverse = True
   else:
-    new_results = get_results("vault/"+newest_data_file)
+    new_results = get_results(newest_data_file)
     dL = new_results[0] - current_optimization[0]
     dD = new_results[1] - current_optimization[1]
     objective = dL - dD
@@ -130,5 +131,6 @@ while True:
 
 print "===================="
 print "Optimization complete. Optimal feature set: "+optimal_data_file
+print "===================="
 with open('optimal_vector.txt', 'w') as f:
   f.write(optimal_data_file)
