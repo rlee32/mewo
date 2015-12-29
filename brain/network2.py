@@ -263,13 +263,22 @@ class Network(object):
         mnist_loader.load_data_wrapper.
 
         """
-        if convert:
-            results = [(np.argmax(self.feedforward(x)), np.argmax(y))
-                       for (x, y) in data]
-        else:
-            results = [(np.argmax(self.feedforward(x)), y)
-                        for (x, y) in data]
-        return sum(int(x == y) for (x, y) in results)
+        # if convert:
+        #     results = [(np.argmax(self.feedforward(x)), np.argmax(y))
+        #                for (x, y) in data]
+        # else:
+        #     results = [(np.argmax(self.feedforward(x)), y)
+        #                 for (x, y) in data]
+        # return sum(int(x == y) for (x, y) in results)
+
+        results = [ ( self.feedforward(features), results ) \
+            for (features, results) in data ]
+
+        error = [ predicted-actual for ( predicted, actual ) in results ]
+
+        average_error = sum(error) / len(error)
+
+        return average_error
 
     def total_cost(self, data, lmbda, convert=False):
         """Return the total cost for the data set ``data``.  The flag
@@ -281,7 +290,7 @@ class Network(object):
         cost = 0.0
         for x, y in data:
             a = self.feedforward(x)
-            if convert: y = vectorized_result(y)
+            # if convert: y = vectorized_result(y)
             cost += self.cost.fn(a, y)/len(data)
         cost += 0.5*(lmbda/len(data))*sum(
             np.linalg.norm(w)**2 for w in self.weights)
@@ -313,15 +322,15 @@ def load(filename):
     return net
 
 #### Miscellaneous functions
-def vectorized_result(j):
-    """Return a 10-dimensional unit vector with a 1.0 in the j'th position
-    and zeroes elsewhere.  This is used to convert a digit (0...9)
-    into a corresponding desired output from the neural network.
+# def vectorized_result(j):
+#     """Return a 10-dimensional unit vector with a 1.0 in the j'th position
+#     and zeroes elsewhere.  This is used to convert a digit (0...9)
+#     into a corresponding desired output from the neural network.
 
-    """
-    e = np.zeros((10, 1))
-    e[j] = 1.0
-    return e
+#     """
+#     e = np.zeros((10, 1))
+#     e[j] = 1.0
+#     return e
 
 def sigmoid(z):
     """The sigmoid function."""
