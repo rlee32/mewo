@@ -1,3 +1,6 @@
 [submodule "wind_tunnel/openfoam_python"]
 	path = wind_tunnel/openfoam_python
 	url = https://github.com/rlee32/openfoam_python.git
+[submodule "eznn"]
+	path = eznn
+	url = https://github.com/rlee32/eznn.git
