@@ -261,7 +261,6 @@ class Network(object):
         representations speeds things up.  More details on the
         representations can be found in
         mnist_loader.load_data_wrapper.
-
         """
         # if convert:
         #     results = [(np.argmax(self.feedforward(x)), np.argmax(y))
@@ -271,13 +270,24 @@ class Network(object):
         #                 for (x, y) in data]
         # return sum(int(x == y) for (x, y) in results)
 
-        results = [ ( self.feedforward(features), results ) \
-            for (features, results) in data ]
+        # # Difference
+        # results = [ ( self.feedforward(features), result ) \
+        #     for (features, result) in data ]
+        # # print data[0]
+        # # print results[0][0]
+        # error = [ predicted-actual for ( predicted, actual ) in results ]
+        # # print error
+        # average_error = sum(error) / len(error)
+        # # print average_error
+        # # raw_input("Press Enter to continue...")
+        # return average_error
 
-        error = [ predicted-actual for ( predicted, actual ) in results ]
-
+        # Percent error
+        results = [ ( self.feedforward(features), result ) \
+            for (features, result) in data ]
+        error = [ (predicted-actual) / actual * 100 \
+            for ( predicted, actual ) in results ]
         average_error = sum(error) / len(error)
-
         return average_error
 
     def total_cost(self, data, lmbda, convert=False):

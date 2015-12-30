@@ -68,9 +68,57 @@ def get_neural_network_data(vault_path):
   dat_files = get_all_dat_files(vault_path)
   all_instances = [ read_feature_vector(vault_path+"/"+x, 25) \
     for x in dat_files ]
-  (training_data, validation_data, test_data) = \
+  # Transform data
+  feature_transform = read_scale_data("feature_scaling.dat")
+  result_transform = read_scale_data("result_scaling.dat")
+  transform_instances(all_instances, feature_transform, result_transform)
+  (training_data_, validation_data_, test_data_) = \
     split_data(all_instances, 0.6, 0.2)
+  training_data = [ numpy_instance(x) for x in training_data_ ]
+  validation_data = [ numpy_instance(x) for x in validation_data_ ]
+  test_data = [ numpy_instance(x) for x in test_data_ ]
   return (training_data, validation_data, test_data)
+
+def unit_scale(data, index_range, value_range):
+  """
+  Transforms the input values to within [0,1].
+  """
+  dv = value_range[1] - value_range[0]
+  # print index_range
+  # print value_range
+  # print len(data)
+  data[index_range[0]:(index_range[1]+1)] = \
+    [ (x-value_range[0]) / dv \
+    for x in data[index_range[0]:(index_range[1]+1)] ]
+  # print data
+  return data
+
+def read_scale_data(path):
+  scale_data = []
+  with open(path, 'r') as f:
+    for line in f:
+      arr = line.split(',')
+      tup = [ int(arr[0]), int(arr[1]), float(arr[2]), float(arr[3]) ]
+      # print tup
+      scale_data.append( tup )
+  return scale_data
+
+def transform_instances(instances, feature_scale, result_scale):
+  """
+  instances: a list of 2-tuples (features, results) of ndarrays. A single tuple 
+  is a single instance.
+  """
+  for scale in feature_scale:
+    instances = [ \
+      ( unit_scale(feature, scale[0:2], scale[2:4]), result ) \
+      for (feature, result) in instances ]
+  for scale in result_scale:
+    instances = [ \
+      ( feature, unit_scale(result, scale[0:2], scale[2:4]) ) \
+      for (feature, result) in instances ]
+  # print result_scale
+  # raw_input("press enter to continue...")
+  return
 
 def common_elements(list1, list2):
   return [element for element in list1 if element in list2]
@@ -85,7 +133,9 @@ def numpy_instance(instance):
   Converts an instance defined with lists to an instance defined with 
   numpy.ndarray.
   """
-  new_instance = (numpy.array(instance[0]), numpy.array(instance[1]))
+  feature_array = [ [numpy.array(x)] for x in instance[0] ]
+  result_array = [ [numpy.array(x)] for x in instance[1] ]
+  new_instance = (numpy.array(feature_array), numpy.array(result_array))
   return new_instance
 
 if __name__ == '__main__':
@@ -130,3 +180,9 @@ if __name__ == '__main__':
   print len(tr)
   print len(v)
   print len(te)
+
+  print type(tr)
+  print type(tr[0])
+  print type(tr[0][1])
+  print type(tr[0][1][0])
+  print type(tr[0][1][0][0])
