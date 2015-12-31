@@ -27,8 +27,6 @@ The modules are divided into their own folders:
 The CFD solver parameters and general meshing characteristics are fixed for 
 each optimization study. See the modules for details.
 
-
-
 ## Neural Network Performance
 
 At the time of writing this section, I tried there were only 88 total 
