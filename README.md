@@ -31,13 +31,14 @@ each optimization study. See the modules for details.
 
 At the time of writing this section, I tried there were only 88 total 
 instances to train, validate, and test on. 
-Still, the performance was promising. 
+The results are a bit inconclusive.
 After playing with the parameters a little bit, it seems that 
 currently the parameters do not affect the results that much, and that may be 
 due to too little data. 
-The training and test errors are usually off by a few percent or less, but 
-occasionally you get errors on the order of 10%. 
-With more instances, I think the results will be more consistent. 
+The training and test errors are usually off on the order of a few percent, 
+but occasionally you get errors on the order of 10%. 
+With more training data, I think the results will be more consistent. 
+Using more hidden layers did not produce a noticeable trend in results. 
 Much of the training data are 'near' each other in the feature set; much of the 
 data were produced by changing a single feature by a step change.
 
