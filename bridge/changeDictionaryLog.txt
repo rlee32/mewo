@@ -1,0 +1,89 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : 3.0.0-8b097f6d8dd9
+Exec   : changeDictionary
+Date   : Jan 27 2016
+Time   : 20:54:56
+Host   : "lordvon-XPS-8300"
+PID    : 11269
+Case   : /home/lordvon/Desktop/mewo/wind_tunnel_fine
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Read dictionary changeDictionaryDict with replacements for dictionaries 1(boundary)
+Reading polyMesh/boundary file to extract patch names
+Loaded dictionary boundary with entries 
+5
+(
+front_and_back
+tunnel
+inlet
+outlet
+wing
+)
+
+Replacing entries in dictionary boundary
+Special handling of boundary as polyMesh/boundary file.
+Merging entries from 
+3
+(
+front_and_back
+tunnel
+wing
+)
+
+fieldDict:
+{
+    front_and_back
+    {
+        type            empty;
+        physicalType    patch;
+        nFaces          265596;
+        startFace       198674;
+    }
+    tunnel
+    {
+        type            slip;
+        physicalType    patch;
+        nFaces          128;
+        startFace       464270;
+    }
+    inlet
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          61;
+        startFace       464398;
+    }
+    outlet
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          61;
+        startFace       464459;
+    }
+    wing
+    {
+        type            wall;
+        physicalType    patch;
+        nFaces          796;
+        startFace       464520;
+    }
+}
+
+Writing modified boundary
+
+End
+

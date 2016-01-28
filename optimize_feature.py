@@ -16,6 +16,7 @@ being worked on at a time.
 
 import os
 import sys
+import objective_function
 
 # Hard-coded parameters for the current application.
 MAX_FEATURES = 25
@@ -114,9 +115,12 @@ while True:
       reverse = True
   else:
     new_results = get_results(newest_data_file)
-    dL = new_results[0] - current_optimization[0]
-    dD = new_results[1] - current_optimization[1]
-    objective = dL - dD
+    L = new_results[0]
+    D = new_results[1]
+    dL = L - current_optimization[0]
+    dD = D - current_optimization[1]
+    objective = objective_function.objective(dL, dD, L, D)
+    print "Objective value: "+str(objective)
     if objective >= 0:
       optimal_data_file = newest_data_file
       current_optimization = new_results

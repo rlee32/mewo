@@ -12,5 +12,11 @@ if len(sys.argv) < 2:
   print "No arguments!"
   sys.exit()
 
-for item in sys.argv[1:]:
-  os.system("./single_operation.py "+item)
+# for item in sys.argv[1:]:
+#  os.system("./single_operation.py "+item)
+
+start = int(sys.argv[1])
+end = int(sys.argv[2])
+
+for k in range(start,end+1):
+  os.system("./single_operation.py v"+str(k))
