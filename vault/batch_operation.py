@@ -20,3 +20,4 @@ end = int(sys.argv[2])
 
 for k in range(start,end+1):
   os.system("./single_operation.py v"+str(k))
+
